@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - Умный ИИ с играми</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
+</head>
+<body>
+    <div id="app">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-logo">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h1 class="welcome-title">AI Assistant</h1>
+            <p class="welcome-subtitle">Умный ИИ с играми и памятью</p>
+            <input type="text" class="welcome-input" id="welcome-name" 
+                   placeholder="Как тебя зовут?" maxlength="20">
+            <button class="welcome-button" id="start-btn">Начать</button>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-comments"></i>
+                    <span>Умный чат</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Мини-игры</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-brain"></i>
+                    <span>Общая память</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen">
+            <div class="menu-header">
+                <h2 class="menu-title">AI Assistant</h2>
+                <p class="menu-subtitle" id="user-greeting">Привет!</p>
+            </div>
+            
+            <div class="menu-buttons">
+                <div class="menu-button" id="chat-btn">
+                    <i class="fas fa-comment"></i>
+                    <span>Чат с ИИ</span>
+                </div>
+                
+                <div class="menu-button" id="profile-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Мой профиль</span>
+                </div>
+                
+                <div class="menu-button" id="games-btn">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Мини-игры</span>
+                </div>
+                
+                <div class="menu-button" id="about-btn">
+                    <i class="fas fa-info-circle"></i>
+                    <span>О проекте</span>
+                </div>
+            </div>
+            
+            <div class="version">v1.0.0</div>
+        </div>
+        
+        <!-- Chat Interface -->
+        <div id="chat-container" class="screen">
+            <div class="chat-header">
+                <div class="chat-user-info">
+                    <div class="ai-avatar" id="ai-menu-btn">
+                        🤖
+                    </div>
+                    <div class="chat-title">AI Assistant</div>
+                </div>
+                <div class="chat-controls">
+                    <div class="back-button" id="back-to-menu">
+                        <i class="fas fa-home"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ai-menu" id="ai-menu">
+                <div class="menu-item" id="clear-chat-btn">
+                    <i class="fas fa-trash"></i>
+                    <span>Очистить чат</span>
+                </div>
+                <div class="menu-item" id="memory-btn">
+                    <i class="fas fa-memory"></i>
+                    <span>Что я помню</span>
+                </div>
+                <div class="menu-item" id="teach-btn">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Научить ИИ</span>
+                </div>
+                <div class="menu-item" id="games-menu-btn">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Игры</span>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be loaded here -->
+            </div>
+            
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="message-avatar">🤖</div>
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="user-input" 
+                       placeholder="Напишите сообщение...">
+                <button class="send-button" id="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Settings Menu -->
+        <div id="settings-menu" class="screen">
+            <div class="chat-header">
+                <div class="chat-title">Мой профиль</div>
+                <div class="back-button" id="back-from-settings">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+            </div>
+            
+            <div class="settings-content">
+                <div class="settings-section">
+                    <div class="settings-title">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Мой профиль</span>
+                    </div>
+                    
+                    <div class="avatar-preview-container">
+                        <div class="avatar-preview" id="avatar-preview">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <p class="user-info" id="user-name-display">Имя: </p>
+                    </div>
+                    
+                    <div class="settings-title">
+                        <i class="fas fa-edit"></i>
+                        <span>Изменить имя</span>
+                    </div>
+                    <input type="text" class="settings-input" id="name-input" 
+                           placeholder="Новое имя">
+                    <button class="save-button" id="save-name-btn">
+                        Сохранить имя
+                    </button>
+                    
+                    <div class="settings-title">
+                        <i class="fas fa-palette"></i>
+                        <span>Цвет аватара</span>
+                    </div>
+                    <div class="color-picker" id="color-picker">
+                        <!-- Colors loaded by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <div class="settings-title">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Статистика</span>
+                    </div>
+                    <div id="user-stats" class="user-info">
+                        Загрузка...
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <div class="settings-title">
+                        <i class="fas fa-cogs"></i>
+                        <span>Настройки</span>
+                    </div>
+                    <div class="setting-option">
+                        <label>
+                            <input type="checkbox" id="sound-toggle" checked>
+                            <span>Звуки уведомлений</span>
+                        </label>
+                    </div>
+                    <div class="setting-option">
+                        <label>
+                            <input type="checkbox" id="animations-toggle" checked>
+                            <span>Анимации</span>
+                        </label>
+                    </div>
+                    <button class="secondary-button" id="reset-btn">
+                        <i class="fas fa-redo"></i>
+                        Сбросить данные
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Games Menu -->
+        <div id="games-menu" class="screen">
+            <div class="chat-header">
+                <div class="chat-title">Мини-игры</div>
+                <div class="back-button" id="back-from-games">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+            </div>
+            
+            <div class="games-content">
+                <div class="games-grid">
+                    <div class="game-card" id="tic-tac-toe-game">
+                        <div class="game-icon">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <h3>Крестики-нолики</h3>
+                        <p>Игра против ИИ</p>
+                    </div>
+                    
+                    <div class="game-card" id="math-game">
+                        <div class="game-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Математика</h3>
+                        <p>Тренировка счёта</p>
+                    </div>
+                    
+                    <div class="game-card" id="memory-game">
+                        <div class="game-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Память</h3>
+                        <p>Найди пары</p>
+                    </div>
+                    
+                    <div class="game-card" id="quiz-game">
+                        <div class="game-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Викторина</h3>
+                        <p>Проверь знания</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Overlay -->
+        <div id="game-overlay" class="overlay">
+            <div class="game-container" id="game-container">
+                <!-- Game content loaded here -->
+            </div>
+        </div>
+        
+        <!-- Admin Panel (hidden by default) -->
+        <div id="admin-panel" class="screen">
+            <div class="chat-header">
+                <div class="chat-title">Админ-панель</div>
+                <div class="back-button" id="back-from-admin">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+            </div>
+            
+            <div class="admin-content">
+                <div class="admin-section">
+                    <div class="settings-title">
+                        <i class="fas fa-users"></i>
+                        <span>Пользователи системы</span>
+                    </div>
+                    
+                    <div class="admin-stats" id="admin-stats">
+                        <!-- Stats loaded here -->
+                    </div>
+                    
+                    <div class="search-box">
+                        <input type="text" id="user-search" 
+                               placeholder="Поиск пользователя..." 
+                               class="search-input">
+                    </div>
+                    
+                    <div class="user-list" id="user-list">
+                        <!-- Users loaded here -->
+                    </div>
+                    
+                    <div class="conversation-view" id="conversation-view">
+                        <!-- Selected conversation -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notification Container -->
+        <div id="notification-container"></div>
+        
+        <!-- Audio Elements -->
+        <audio id="notification-sound" preload="auto">
+            <source src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="message-sound" preload="auto">
+            <source src="https://assets.mixkit.co/sfx/preview/mixkit-message-pop-alert-2354.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/ai-brain.js"></script>
+    <script src="assets/js/games.js"></script>
+    <script src="assets/js/chat.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
