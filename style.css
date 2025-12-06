@@ -1,38 +1,3 @@
-/* Общие стили */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background: linear-gradient(135deg, #1a237e, #283593);
-    color: white;
-    height: 100vh;
-    overflow: hidden;
-}
-
-#app {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.screen {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-    flex-direction: column;
-}
-
-.screen.active {
-    display: flex;
-}
-
 /* Приветственный экран */
 #welcome-screen {
     align-items: center;
@@ -65,31 +30,28 @@ h1 {
     line-height: 1.5;
 }
 
-.input-container {
+#user-name {
     width: 100%;
     max-width: 320px;
-    margin: 20px 0;
-}
-
-.input-container input {
-    width: 100%;
     padding: 15px;
     border: 2px solid #64b5f6;
     border-radius: 10px;
     background: rgba(255,255,255,0.1);
     color: white;
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-.input-container input:focus {
+#user-name:focus {
     outline: none;
     border-color: #2196f3;
 }
 
+/* Кнопки */
 button {
     width: 100%;
+    max-width: 320px;
     padding: 15px;
     background: #2196f3;
     color: white;
@@ -99,36 +61,12 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    margin: 5px 0;
 }
 
 button:hover {
     background: #1976d2;
     transform: translateY(-2px);
-}
-
-.features {
-    display: flex;
-    gap: 20px;
-    margin-top: 40px;
-}
-
-.feature {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    color: #bbdefb;
-}
-
-.feature i {
-    font-size: 24px;
-    background: rgba(100,181,246,0.2);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Главное меню */
@@ -152,23 +90,6 @@ button:hover {
 #greeting {
     color: #90caf9;
     font-size: 18px;
-}
-
-.menu {
-    width: 100%;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.menu button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 18px;
-    font-size: 17px;
 }
 
 /* Чат */
@@ -209,6 +130,9 @@ button:hover {
     border-radius: 50%;
     background: rgba(33,150,243,0.2);
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Меню ИИ */
@@ -326,6 +250,7 @@ button:hover {
     height: 50px;
     border-radius: 50%;
     padding: 0;
+    margin: 0;
 }
 
 /* Настройки */
@@ -392,13 +317,13 @@ button:hover {
     border-color: #ffeb3b;
 }
 
-.danger-btn {
-    background: #f44336;
-    margin-top: 20px;
-}
-
-.danger-btn:hover {
-    background: #d32f2f;
+#stats {
+    background: rgba(26,35,126,0.3);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(100,181,246,0.3);
+    color: #90caf9;
+    line-height: 1.6;
 }
 
 /* Уведомления */
@@ -442,7 +367,20 @@ button:hover {
 @media (max-width: 480px) {
     .logo { font-size: 60px; }
     h1 { font-size: 28px; }
-    .menu { max-width: 280px; }
-    .features { flex-direction: column; gap: 15px; }
+    button { max-width: 280px; }
     .avatar { width: 80px; height: 80px; font-size: 32px; }
+}
+
+/* Скрыть scrollbar но оставить возможность скролла */
+.messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+.messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background: rgba(100,181,246,0.5);
+    border-radius: 10px;
 }

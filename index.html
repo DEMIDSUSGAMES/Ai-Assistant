@@ -3,9 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Assistant | Умный ИИ</title>
+    <title>AI Assistant</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: linear-gradient(135deg, #1a237e, #283593);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #app {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .screen {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            flex-direction: column;
+        }
+        .screen.active { display: flex; }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -13,27 +38,9 @@
         <div id="welcome-screen" class="screen active">
             <div class="logo">🤖</div>
             <h1>AI Assistant</h1>
-            <p class="subtitle">Умный ИИ который всё понимает и запоминает</p>
-            
-            <div class="input-container">
-                <input type="text" id="user-name" placeholder="Как тебя зовут?">
-                <button onclick="startApp()">Начать</button>
-            </div>
-            
-            <div class="features">
-                <div class="feature">
-                    <i class="fas fa-brain"></i>
-                    <span>Умный ИИ</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-memory"></i>
-                    <span>Помнит всё</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-user-friends"></i>
-                    <span>Знает секреты</span>
-                </div>
-            </div>
+            <p class="subtitle">Умный ИИ с памятью</p>
+            <input type="text" id="user-name" placeholder="Как тебя зовут?">
+            <button onclick="startApp()">Начать</button>
         </div>
         
         <!-- Главное меню -->
@@ -42,73 +49,40 @@
                 <h2>AI Assistant</h2>
                 <p id="greeting">Привет!</p>
             </div>
-            
-            <div class="menu">
-                <button onclick="openChat()">
-                    <i class="fas fa-comment"></i>
-                    Чат с ИИ
-                </button>
-                <button onclick="openSettings()">
-                    <i class="fas fa-user"></i>
-                    Мой профиль
-                </button>
-                <button onclick="showAbout()">
-                    <i class="fas fa-info-circle"></i>
-                    О проекте
-                </button>
-            </div>
+            <button onclick="openChat()"><i class="fas fa-comment"></i> Чат с ИИ</button>
+            <button onclick="openSettings()"><i class="fas fa-user"></i> Мой профиль</button>
         </div>
         
         <!-- Чат -->
         <div id="chat-screen" class="screen">
             <div class="chat-header">
-                <div class="ai-avatar" onclick="toggleMenu()">🤖</div>
+                <div class="ai-avatar" onclick="toggleAIMenu()">🤖</div>
                 <div class="chat-info">
                     <h3>AI Assistant</h3>
                     <p>Умный ИИ</p>
                 </div>
-                <button class="back-btn" onclick="goToMenu()">
-                    <i class="fas fa-home"></i>
-                </button>
+                <button class="back-btn" onclick="goToMenu()"><i class="fas fa-home"></i></button>
             </div>
             
             <!-- Меню ИИ -->
             <div id="ai-menu" class="ai-menu">
-                <div onclick="clearChat()">
-                    <i class="fas fa-trash"></i>
-                    Очистить чат
-                </div>
-                <div onclick="showMemory()">
-                    <i class="fas fa-memory"></i>
-                    Что я помню
-                </div>
-                <div onclick="teachAI()">
-                    <i class="fas fa-graduation-cap"></i>
-                    Научить ИИ
-                </div>
+                <div onclick="clearChat()"><i class="fas fa-trash"></i> Очистить чат</div>
+                <div onclick="showMemory()"><i class="fas fa-memory"></i> Что я помню</div>
+                <div onclick="teachAI()"><i class="fas fa-graduation-cap"></i> Научить ИИ</div>
             </div>
             
             <!-- Сообщения -->
-            <div id="chat-messages" class="messages">
-                <!-- Сообщения появятся здесь -->
-            </div>
+            <div id="chat-messages" class="messages"></div>
             
             <!-- Набор сообщения -->
             <div class="typing" id="typing">
-                <div class="dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+                <div class="dots"><span></span><span></span><span></span></div>
             </div>
             
-            <!-- Ввод сообщения -->
+            <!-- Ввод -->
             <div class="input-area">
-                <input type="text" id="message-input" placeholder="Напишите сообщение..." 
-                       onkeypress="if(event.key === 'Enter') sendMessage()">
-                <button onclick="sendMessage()">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+                <input type="text" id="message-input" placeholder="Напишите сообщение..." onkeypress="if(event.key === 'Enter') sendMessage()">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
         
@@ -116,25 +90,18 @@
         <div id="settings-screen" class="screen">
             <div class="header">
                 <h2>Мой профиль</h2>
-                <button class="back-btn" onclick="goToMenu()">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
+                <button class="back-btn" onclick="goToMenu()"><i class="fas fa-arrow-left"></i></button>
             </div>
-            
             <div class="settings-content">
                 <div class="profile-card">
-                    <div class="avatar" id="user-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
+                    <div class="avatar" id="user-avatar"><i class="fas fa-user"></i></div>
                     <h3 id="display-name">Имя</h3>
                 </div>
-                
                 <div class="setting">
                     <h4><i class="fas fa-edit"></i> Изменить имя</h4>
                     <input type="text" id="new-name" placeholder="Новое имя">
                     <button onclick="changeName()">Сохранить</button>
                 </div>
-                
                 <div class="setting">
                     <h4><i class="fas fa-palette"></i> Цвет аватара</h4>
                     <div class="colors">
@@ -142,20 +109,9 @@
                         <div class="color" style="background:#4caf50" onclick="changeColor('#4caf50')"></div>
                         <div class="color" style="background:#ff9800" onclick="changeColor('#ff9800')"></div>
                         <div class="color" style="background:#e91e63" onclick="changeColor('#e91e63')"></div>
-                        <div class="color" style="background:#9c27b0" onclick="changeColor('#9c27b0')"></div>
-                        <div class="color" style="background:#00bcd4" onclick="changeColor('#00bcd4')"></div>
                     </div>
                 </div>
-                
-                <div class="setting">
-                    <h4><i class="fas fa-chart-bar"></i> Моя статистика</h4>
-                    <div id="stats">Загрузка...</div>
-                </div>
-                
-                <button class="danger-btn" onclick="resetData()">
-                    <i class="fas fa-trash"></i>
-                    Сбросить все данные
-                </button>
+                <div id="stats">Загрузка...</div>
             </div>
         </div>
         
@@ -164,7 +120,8 @@
     </div>
     
     <!-- JavaScript -->
-    <script src="ai.js"></script>
+    <script src="ai-brain.js"></script>
+    <script src="chat.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
